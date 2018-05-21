@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>79. Word Search</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/word-search/description/" target="_blank">https://leetcode.com/problems/word-search/description/</a>
+    <script>
+        /**
+         * @param {character[][]} board
+         * @param {string} word
+         * @return {boolean}
+         */
+        var exist = function(board, word) {
+            let result = false;
+            const boardRows = board.length;
+            const boardCols = board[0].length;
+
+            for (var i = 0; i < boardRows; i++) {
+                for (var j = 0; j < boardCols; j++) {
+                    result = _exist(i,j,word,{});
+                    if (result === true) {
+                        return result;
+                    }
+                }
+            }
+
+            return false;
+
+            /**
+             * Recursive search
+             *
+             * @param {number} rowIndex
+             * @param {number} colIndex
+             * @param {string} word
+             * @param {object} searchMap
+             * @private
+             */
+            function _exist(rowIndex, colIndex, word, searchMap) {
+                const char = word[0];
+                if (char !== board[rowIndex][colIndex]) {
+                    return false;
+                }
+                searchMap[rowIndex+':'+colIndex] = 1; // correct symbol found in this cell
+                const wordRest = word.slice(1, word.length);
+                if (wordRest.length == 0) {
+                    return true;
+                }
+
+                if (rowIndex-1 >= 0 && searchMap[(rowIndex-1)+':'+colIndex]!==1) {
+                    // up
+                    if (_exist(rowIndex-1, colIndex, wordRest, searchMap)) return true
+                }
+                if (colIndex+1 < boardCols && searchMap[rowIndex+':'+(colIndex+1)]!==1) {
+                    // right
+                    if (_exist(rowIndex, colIndex+1, wordRest, searchMap)) return true
+                }
+                if (rowIndex+1 < boardRows && searchMap[(rowIndex+1)+':'+colIndex]!==1) {
+                    // down
+                    if (_exist(rowIndex+1, colIndex, wordRest, searchMap)) return true
+                }
+                if (colIndex-1 >= 0 && searchMap[rowIndex+':'+(colIndex-1)]!==1) {
+                    // left
+                    if (_exist(rowIndex, colIndex-1, wordRest, searchMap)) return true
+                }
+
+                searchMap[rowIndex+':'+colIndex] = 0;
+                return false;
+            }
+        };
+    </script>
+</body>
+</html>

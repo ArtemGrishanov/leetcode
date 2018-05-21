@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>42. Trapping Rain Water</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/trapping-rain-water/description/" target="_blank">https://leetcode.com/problems/trapping-rain-water/description/</a>
+    <script>
+        /**
+         * @param {number[]} heights
+         * @return {number}
+         */
+        var trap = function(heights) {
+            if (heights.length < 3) {
+                // no space for water
+                return 0
+            }
+            let maxNumbers = _find2MaxNumberIndexes(heights); // returns 2-element array
+            let threeArrays = _getThreeArraysByTwoPoints(heights, maxNumbers[0], maxNumbers[1]);
+            let water = _collectWater(threeArrays[1]) // collect water in the middle array
+            // repeat process for first and third arrays
+            water += trap(threeArrays[0])
+            water += trap(threeArrays[2])
+            return water
+        };
+
+        function _find2MaxNumberIndexes(arr) {
+            let len = arr.length
+            if (len < 2) {
+                return []
+            }
+
+            let biggest = -Infinity
+            let nextBiggest = -Infinity
+            let biggestIndex = undefined
+            let nextBiggestIndex = undefined
+
+
+            for (var i = 0, n = len; i < n; ++i) {
+                var nr = arr[i]
+
+                if (nr > biggest) {
+                    nextBiggest = biggest // save previous biggest value
+                    nextBiggestIndex = biggestIndex
+                    biggest = nr
+                    biggestIndex = i
+                } else if (nr <= biggest && nr > nextBiggest) {
+                    nextBiggest = nr // new second biggest value
+                    nextBiggestIndex = i
+                }
+
+            }
+
+            return (biggestIndex >= nextBiggestIndex) ? [nextBiggestIndex, biggestIndex]: [biggestIndex, nextBiggestIndex]
+        }
+
+        function _getThreeArraysByTwoPoints(arr, index1, index2) {
+            return [
+                arr.slice(0, index1+1), // +1
+                arr.slice(index1, index2+1), // +1
+                arr.slice(index2, arr.length)
+            ]
+        }
+
+        /**
+         * Array has at least 3 element and edge elements are max
+         * @param {array} arr
+         * @private
+         */
+        function _collectWater(arr) {
+            let minMax = Math.min(arr[0], arr[arr.length-1]);
+            let result = 0
+            arr.forEach((e) => {
+                result += ((minMax > e) ? (minMax-e): 0)
+            })
+            return result
+        }
+    </script>
+</body>
+</html>

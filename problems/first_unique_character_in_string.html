@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>387. First Unique Character in a String</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/first-unique-character-in-a-string/description/" target="_blank">https://leetcode.com/problems/first-unique-character-in-a-string/description/</a>
+    <script>
+        var firstUniqChar = function(s) {
+            let chars = {}
+
+            for (var i = 0; i < s.length; i++) {
+                if (chars[s[i]] === undefined) {
+                    // unique symbol
+                    chars[s[i]] = i;
+                }
+                else {
+                    // repeat
+                    chars[s[i]] = -1;
+                }
+
+            }
+
+            var result = -1;
+            for (var key in chars) {
+                if (chars[key] >= 0 && (chars[key] < result || result === -1)) {
+                    result = chars[key];
+                }
+            }
+
+            return result;
+        };
+    </script>
+</body>
+</html>

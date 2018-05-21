@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23. Merge k Sorted Lists</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/merge-k-sorted-lists/description/" target="_blank">https://leetcode.com/problems/merge-k-sorted-lists/description/</a>
+    <script>
+        var mergeKLists = function(lists) {
+            let list = undefined;
+            let result = new ListNode()
+            let node = undefined;
+            let storePos = {}, storeNeg = {};
+
+            for (var i = 0; i < lists.length; i++) {
+
+                node = lists[i];
+
+                while (node !== null) {
+                    _putValToStore(node.val >= 0 ? storePos: storeNeg, node.val);
+                    node = node.next;
+                }
+            }
+
+            return _storeToLinkedList(storeNeg, storePos);
+
+            function _putValToStore(store, val) {
+                const key = (val >= 0) ? val: -val
+                if (store[key] === undefined) {
+                    store[key] = new ListNode(val);
+                }
+                else {
+                    // add in the first position
+                    var newNode = new ListNode(val);
+                    newNode.next = store[key];
+                    store[key] = newNode;
+                }
+            }
+
+            function _storeToLinkedList(storeNeg, storePos) {
+                let result = null;
+                let node = undefined;
+                let prevNode = null;
+                //let prev1Node = null;
+                let maxNegNode = null;
+                let tail = null
+
+                for (var key in storeNeg) {
+                    node = storeNeg[key];
+
+                    if (maxNegNode === null) {
+                        // node to connect with positive
+                        maxNegNode = node;
+                    }
+                    tail = node;
+                    while (tail.next !== null) {
+                        tail = tail.next;
+                    }
+                    if (prevNode) {
+                        // connect different values
+                        tail.next = prevNode;
+                    }
+                    prevNode = node;
+                }
+                if (node) {
+                    result = node;
+                }
+                prevNode = null;
+                node = null;
+
+                for (var key in storePos) {
+                    node = storePos[key];
+                    if (maxNegNode) {
+                        // connect neg with positive here
+                        maxNegNode.next = node;
+                        maxNegNode = null;
+                    }
+
+                    if (result === null) {
+                        result = node;
+                    }
+                    if (prevNode) {
+                        // connect different values
+                        prevNode.next = node;
+                    }
+                    while (node.next !== null) {
+                        node = node.next;
+                    }
+                    prevNode = node;
+                }
+
+                return result;
+            }
+        }
+
+        /**
+         *
+         * @param {string} str = "1->4->5"
+         */
+        function createList(str) {
+            var arr = str.split('->');
+            var prevNode = null;
+            var result = null;
+            for (var i = 0; i < arr.length; i++) {
+                var node = new ListNode(parseInt(arr[i]));
+                if (result === null) {
+                    result = node;
+                }
+                if (prevNode) {
+                    prevNode.next = node;
+                }
+                prevNode = node;
+            }
+
+            return result;
+        }
+    </script>
+</body>
+</html>

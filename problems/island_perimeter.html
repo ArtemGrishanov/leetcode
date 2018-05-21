@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>463. Island Perimeter</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/island-perimeter/description/" target="_blank">https://leetcode.com/problems/island-perimeter/description/</a>
+    <script>
+
+        /**
+         * @param {number[][]} grid
+         * @return {number}
+         */
+        var islandPerimeter = function(grid) {
+            // find first insland piece
+
+            const height = grid.length;
+            const width = grid[0].length;
+            let result = 0
+            let map = {}; // where we were
+
+            // find one cell
+            for (var y = 0; y < grid.length; y++) {
+                for (var x = 0; x < grid[y].length; x++) {
+                    if (grid[y][x] === 1) {
+                        return getCellPerimeter(x, y);
+                    }
+                }
+            }
+            return 0;
+
+
+
+            function getCellPerimeter(x, y) {
+                let perim = 0;
+
+                if (map[x+':'+y] !== undefined) {
+                    // alrready calculated cell
+                    return 0;
+                }
+
+                // we was here
+                map[x+':'+y] = 1;
+
+                // up
+                if (y == 0 || ((y>0) && (grid[y-1][x])==0)) {
+                    perim += 1;
+                }
+                // down
+                if (y == height-1 || ((y<height-1) && (grid[y+1][x])==0)) {
+                    perim += 1;
+                }
+                // left
+                if (x == 0 || ((x>0) && (grid[y][x-1])==0)) {
+                    perim += 1;
+                }
+                // right
+                if (x == width-1 || ((x<width-1) && (grid[y][x+1])==0)) {
+                    perim += 1;
+                }
+
+                let nbrs = getNeighbours(x,y);
+                for (var i = 0; i < nbrs.length; i++) {
+                    perim += getCellPerimeter(nbrs[i][0], nbrs[i][1]);
+                }
+
+                return perim;
+            }
+
+            function getNeighbours(x, y) {
+                let result = [];
+                if (y > 0 && grid[y-1][x]===1) {
+                    // up
+                    result.push([x,y-1]);
+                }
+                if (y < height-1 && grid[y+1][x]===1) {
+                    // down
+                    result.push([x,y+1]);
+                }
+                if (x > 0 && grid[y][x-1]===1) {
+                    // left
+                    result.push([x-1,y]);
+                }
+                if (x < width-1 && grid[y][x+1]===1) {
+                    // right
+                    result.push([x+1,y]);
+                }
+                return result;
+            }
+        };
+
+        var input = [[0,1,0,0],
+            [1,1,1,0],
+            [0,1,0,0],
+            [1,1,0,0]];
+
+        var r = islandPerimeter(input);
+        console.dir(r);
+
+    </script>
+</body>
+</html>

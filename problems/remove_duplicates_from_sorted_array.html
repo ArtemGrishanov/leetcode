@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>26. Remove Duplicates from Sorted Array</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/" target="_blank">https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/</a>
+    <script>
+        /**
+         * @param {number[]} nums
+         * @return {number}
+         */
+        var removeDuplicates = function(nums = []) {
+            let len = nums.length;
+
+            let prev = nums[0]
+            let i = (len > 0) ? 1 : 0;
+            let elem = undefined;
+
+            // auxilary vars
+            let remStart = undefined;
+            let serieLen = undefined;
+
+            while (i < len) {
+                elem =  nums[i];
+
+
+                if (prev === elem) {
+                    // go through а serie of non-unique elements
+                    if (remStart === undefined) {
+                        remStart = i;
+                    }
+                }
+                else if (remStart >= 0) {
+                    // remove duplicate item series from the array
+                    serieLen = i-remStart;
+                    nums.splice(remStart, serieLen);
+                    i -= serieLen;
+                    remStart = undefined;
+                    len = nums.length;
+                }
+
+                prev = elem;
+                i++;
+            }
+
+            if (remStart >= 0) {
+                // remove duplicate item series from the array
+                serieLen = i-remStart;
+                nums.splice(remStart, serieLen);
+                i -= serieLen;
+                remStart = undefined;
+                len = nums.length;
+            }
+
+            return i;
+        }
+    </script>
+</body>
+</html>

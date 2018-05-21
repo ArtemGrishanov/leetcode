@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>27. Remove Element</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/remove-element/description/" target="_blank">https://leetcode.com/problems/remove-element/description/</a>
+    <script>
+        /**
+         * @param {number[]} nums
+         * @param {number} val
+         * @return {number}
+         */
+        var removeElement = function(nums, val) {
+            let index = nums.indexOf(val);
+
+            while (index >= 0) {
+                nums.splice(index, 1);
+                index = nums.indexOf(val);
+            }
+
+            return nums.length
+        };
+    </script>
+</body>
+</html>

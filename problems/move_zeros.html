@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>283. Move Zeroes</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/move-zeroes/description/" target="_blank">https://leetcode.com/problems/move-zeroes/description/</a>
+    <script>
+        var moveZeroes = function(nums) {
+            let len = nums.length;
+            let elem = undefined;
+            for (let i = 0; i < len;) {
+                elem = nums[i];
+                if (elem === 0) {
+                    nums.splice(i,1);
+                    nums.push(0);
+                    // move to the end and descrease length
+                    len--;
+                }
+                else {
+                    i++;
+                }
+            }
+        };
+    </script>
+</body>
+</html>

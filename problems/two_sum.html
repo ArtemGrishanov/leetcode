@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>1. Two Sum</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/two-sum/description/" target="_blank">https://leetcode.com/problems/two-sum/description/</a>
+    <script>
+        /**
+         * @param {number[]} nums
+         * @param {number} target
+         * @return {number[]}
+         */
+        var twoSum = function(nums, target) {
+            let h = {} // cache for numbers
+            let len = nums.length
+            let c, e = undefined
+
+            for (var i = 0; i < len; i++) {
+                e = nums[i]
+
+                c = target-e
+
+                if (h[c] || h[c] === 0) {
+                    // we already have found a companion
+                    // e + companion = target
+                    return [h[c], i]
+                }
+                else {
+                    h[e] = i;
+                }
+            }
+
+            return null;
+        };
+    </script>
+</body>
+</html>

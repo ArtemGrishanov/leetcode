@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>155. Min Stack</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * initialize your data structure here.
+         */
+        var MinStack = function() {
+            this.data = [];
+            this.min = undefined;
+            /**
+             * Supporting data structure
+             * - ordering min->max: simple insert new item into appropriate position
+             * - simple removing any element
+             * -
+             */
+            //this.sortedStack = []; // -14 -5 0 2 5 78
+        };
+
+        /**
+         * @param {number} x
+         * @return {void}
+         */
+        MinStack.prototype.push = function(x) {
+            if (x !==undefined && x !== null) {
+                if (this.min === undefined) {
+                    this.min = this.getMin();
+                }
+                if (x < this.min) {
+                    this.min = x;
+                }
+                this.data.push(x);
+            }
+            //todo insert item in sorted array...
+
+        };
+
+        /**
+         * @return {void}
+         */
+        MinStack.prototype.pop = function() {
+            var removedValue = this.data.pop();
+            if (removedValue == this.min) {
+                this.min = undefined;
+            }
+
+            //todo remove this value from sortedStack ...
+
+        };
+
+        /**
+         * @return {number}
+         */
+        MinStack.prototype.top = function() {
+            return (this.data.length>0) ? this.data[this.data.length-1]: undefined;
+        };
+
+        /**
+         *
+         * @return {number}
+         */
+        MinStack.prototype.getMin = function() {
+            //return sortedStack[0];
+
+            if (this.min !== undefined) {
+                return this.min;
+            }
+
+            if (this.data.length > 0) {
+
+                let m = this.data[0];
+
+                for (var i = 1; i < this.data.length; i++) {
+                    if (m > this.data[i]) {
+                        m = this.data[i];
+                    }
+                }
+
+                this.min = m
+                return this.min;
+            }
+
+            return undefined;
+        };
+
+        /**
+         * Your MinStack object will be instantiated and called as such:
+         * var obj = Object.create(MinStack).createNew()
+         * obj.push(x)
+         * obj.pop()
+         * var param_3 = obj.top()
+         * var param_4 = obj.getMin()
+         */
+
+        var minStack = new MinStack();
+        minStack.push(-2);
+        minStack.push(0);
+        minStack.push(-3);
+        assert(minStack.getMin(), -3); //   --> Returns -3.
+        minStack.pop();
+        assert(minStack.top(), 0); //      --> Returns 0.
+        assert(minStack.getMin(), -2); //   --> Returns -2.
+
+        var minStack = new MinStack();
+        minStack.push(-10);
+        minStack.push(14);
+        assert(minStack.getMin(), -10);
+        assert(minStack.getMin(), -10);
+        minStack.push(-20);
+        assert(minStack.getMin(), -20);
+        assert(minStack.getMin(), -20);
+        assert(minStack.top(), -20);
+        assert(minStack.getMin(), -20);
+        minStack.pop(); // remove -20
+        minStack.push(10);
+        minStack.push(-7);
+        assert(minStack.getMin(), -10);
+        minStack.push(-7);
+        minStack.pop();
+        assert(minStack.top(), -7);
+        assert(minStack.getMin(), -10);
+        minStack.pop();
+
+        assert(minStack.getMin(), -10);
+
+        //["MinStack", "push", "push", "getMin", "getMin", "push", "getMin", "getMin", "top","getMin","pop","push","push","getMin","push","pop","top","getMin","pop"]
+        //[[],          [-10], [14],   [],        [],      [-20],  [],       [],       [],    [],      [],   [10],  [-7],  [],      [-7], [],    [],  [],      []]
+
+
+        function assert(actual, expected, msg) {
+            msg = msg || 'error';
+            if (actual === expected) {
+
+            }
+            else {
+                console.error('Expected: \"' + expected + '\", but actual: \"' + actual + '\"')
+            }
+        }
+    </script>
+</body>
+</html>

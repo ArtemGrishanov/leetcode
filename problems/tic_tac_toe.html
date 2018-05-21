@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>348. Design Tic-Tac-Toe</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/design-tic-tac-toe/description/" target="_blank">https://leetcode.com/problems/design-tic-tac-toe/description/</a>
+    <script>
+        /**
+         * Initialize your data structure here.
+         * @param {number} n
+         */
+        var TicTacToe = function(n) {
+            this.n = n;
+            this.board = [];
+            for (var i = 0; i < n; i++) {
+                var row = [];
+                this.board.push(row);
+                for (var j = 0; j < n; j++) {
+                    row.push(0);
+                }
+            }
+        };
+
+        /**
+         * Player {player} makes a move at ({row}, {col}).
+         @param row The row of the board.
+         @param col The column of the board.
+         @param player The player, can be either 1 or 2.
+         @return The current winning condition, can be either:
+         0: No one wins.
+         1: Player 1 wins.
+         2: Player 2 wins.
+         * @param {number} row
+         * @param {number} col
+         * @param {number} player
+         * @return {number}
+         */
+        TicTacToe.prototype.move = function(row, col, player) {
+            this.board[row][col] = player;
+            if (this.checkLine(player,row,0,0,1) || // affected vertical line
+                    this.checkLine(player,0,col,1,0) || // affected horizontal line
+                    ((row+col===this.n-1) && this.checkLine(player,this.n-1,0,-1,1)) || // bottomleft-topright diag
+                    (row===col && this.checkLine(player,0,0,1,1))) // topleft-bottomright diag
+            {
+
+                // check only affected lines
+                return player;
+            }
+            return 0;
+        };
+
+
+        /**
+         * Check specific line of board
+         *
+         * @param {number} player
+         */
+        TicTacToe.prototype.checkLine = function(player, startRow, startCol, incR, incC) {
+            for (var r = startRow, c = startCol; r < this.n && c < this.n; r+= incR, c += incC) {
+                if (this.board[r][c] !== player) {
+                    return false
+                }
+            }
+            return true;
+        };
+    </script>
+</body>
+</html>
