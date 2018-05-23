@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2. Add Two Numbers</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/add-two-numbers/description/" target="_blank">https://leetcode.com/problems/add-two-numbers/description/</a>
+    <script>
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val) {
+         *     this.val = val;
+         *     this.next = null;
+         * }
+         */
+
+        /**
+         * @param {ListNode} l1
+         * @param {ListNode} l2
+         * @return {ListNode}
+         */
+        var addTwoNumbers = function(l1, l2) {
+            // 1 way
+            // return numToList(listToNum(l1) + listToNum(l2));
+
+            // 2 way: only one passing
+            var resultNode = new ListNode();
+            add(l1, l2, resultNode, 0);
+            return resultNode;
+        };
+
+        function add(node1, node2, resultNode, restSum) {
+
+            if (!node1 && !node2 && restSum === 0) {
+                return;
+            }
+            if (!resultNode) {
+                resultNode = new ListNode();
+            }
+
+            val = (node1 ? node1.val: 0) + (node2 ? node2.val: 0) + restSum;
+
+            resultNode.val = val % 10; // last digit
+
+            restSum = (val >= 10) ? 1: 0; // first digit if exists
+
+            resultNode.next = add(
+                    (node1) ? node1.next: null,
+                    (node2) ? node2.next: null,
+                    null,
+                    restSum
+            );
+
+            return resultNode;
+
+        }
+
+        function ListNode(val) {
+            this.val = val;
+            this.next = null;
+        }
+        ListNode.prototype.toString = function() {
+            return this.val + ((this.next) ? ('->'+this.next.toString()): '');
+        }
+
+        /**
+         *
+         * @param {string} str = "1->4->5"
+         */
+        function createList(str) {
+            var arr = str.split('->');
+            var prevNode = null;
+            var result = null;
+            for (var i = 0; i < arr.length; i++) {
+                var node = new ListNode(parseInt(arr[i]));
+                if (result === null) {
+                    result = node;
+                }
+                if (prevNode) {
+                    prevNode.next = node;
+                }
+                prevNode = node;
+            }
+
+            return result;
+        }
+
+        function assert(actual, expected, msg) {
+            msg = msg || 'error';
+            if (actual === expected) {
+
+            }
+            else {
+                console.error('Expected: \"' + expected + '\", but actual: \"' + actual + '\"')
+            }
+        }
+
+        var l1 = createList('1');
+        var l2 = createList('3->5->5')
+        assert(addTwoNumbers(l1,l2).toString(), '4->5->5');
+
+        var l1 = createList('1');
+        var l2 = createList('3')
+        assert(addTwoNumbers(l1,l2).toString(), '4');
+
+        var l1 = createList('7');
+        var l2 = createList('8->9')
+        assert(addTwoNumbers(l1,l2).toString(), '5->0->1');
+
+        var l1 = createList('7->2');
+        var l2 = createList('8->9')
+        assert(addTwoNumbers(l1,l2).toString(), '5->2->1');
+
+        var l1 = createList('2->4->3');
+        var l2 = createList('5->6->4')
+        assert(addTwoNumbers(l1,l2).toString(), '7->0->8');
+
+        var l1 = createList('7->0->8->8');
+        var l2 = createList('8->9->8->3')
+        assert(addTwoNumbers(l1,l2).toString(), '5->0->7->2->1');
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3. Longest Substring Without Repeating Characters</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/description/" target="_blank">https://leetcode.com/problems/longest-substring-without-repeating-characters/description/</a>
+    <script>
+
+        var lengthOfLongestSubstring = function(s) {
+
+            let maxLength = 0, i = 0, j = 0;
+            let buffer = [];
+
+            while (i < s.length && j < s.length) {
+                // try to extend the range [i, j]
+                if (buffer.indexOf(s[j]) < 0) {
+                    // uniq char
+                    buffer.push(s[j]);
+                    j++;
+                    maxLength = Math.max(j-i, maxLength);
+                }
+                else {
+                    // remove char i from buffer
+                    buffer.shift();
+                    i++;
+                }
+            }
+
+            return maxLength;
+        }
+
+        /**
+         * find the length of the longest substring without repeating characters.
+         *
+         * @param {string} s
+         * @return {number}
+         */
+        var lengthOfLongestSubstring_bruteForce = function(s) {
+
+            let maxSubstr = undefined;
+
+            for (var i = 0; i < s.length; i++) {
+
+                let substr = new Substr();
+                let j = i;
+                let char = s[j];
+
+                while (substr.append(char) && j < s.length-1) {
+                    j++;
+                    char = s[j];
+                }
+
+                if (maxSubstr === undefined || maxSubstr.length() < substr.length()) {
+                    maxSubstr = substr;
+                }
+            }
+
+            return (maxSubstr) ? maxSubstr.length(): 0;
+        };
+
+        var Substr = function() {
+            this._data = [];
+            this._map = {};
+        }
+
+        Substr.prototype.append = function(char) {
+
+            // check if exist
+            if (this._map[char] !== undefined) {
+                return false;
+            }
+
+            // append char
+            this._data.push(char)
+            this._map[char] = true;
+
+            return true;
+        }
+
+        Substr.prototype.length = function() {
+            return this._data.length;
+        }
+
+
+        assert(lengthOfLongestSubstring('abcabcbb'),3); //abc
+        assert(lengthOfLongestSubstring('bbbbb'),1); //b
+        assert(lengthOfLongestSubstring('pwwkew'),3); //wke
+        assert(lengthOfLongestSubstring(''),0); //wke
+
+
+        function assert(actual, expected, msg) {
+            msg = msg || 'error';
+            if (actual === expected) {
+
+            }
+            else {
+                console.error('Expected: \"' + expected + '\", but actual: \"' + actual + '\"')
+            }
+        }
+    </script>
+</body>
+</html>
