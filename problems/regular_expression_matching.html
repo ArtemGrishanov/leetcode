@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>10. Regular Expression Matching</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/regular-expression-matching/description/" target="_blank">https://leetcode.com/problems/regular-expression-matching/description/</a>
+    <script>
+
+        /**
+         * @param {string} s
+         * @param {string} p
+         * @return {boolean}
+         */
+        var isMatch = function(s, p, sIndex, pIndex, repeatChar) {
+
+            sIndex = sIndex || 0;
+            pIndex = pIndex || 0;
+
+            let res = false;
+
+            if (sIndex >= s.length && pIndex >= p.length) {
+                // end of search
+                return true;
+            }
+            if (sIndex > s.length || pIndex > p.length) {
+                return false;
+            }
+
+            if (p[pIndex+1] === '*') {
+
+                res = isMatch(s, p, sIndex, pIndex+2); // miss this char, means zero chars also
+
+                if (!res) {
+//                    if (s[sIndex] === p[pIndex] || p[pIndex] === '.' || repeatChar) {
+//                        repeatChar = repeatChar || s[sIndex];
+//                        if (s[sIndex] === repeatChar) {
+//
+//                            res = isMatch(s, p, sIndex+1, pIndex, repeatChar); // use repeat
+//
+//                        }
+//                    }
+                    if (s[sIndex] === p[pIndex] || p[pIndex] === '.') {
+                        res = isMatch(s, p, sIndex+1, pIndex); // use repeat
+                    }
+                }
+            }
+            else if (sIndex < s.length && pIndex < p.length &&
+                    (s[sIndex] === p[pIndex] || p[pIndex] === '.')) {
+                // one char 'a' == 'a' simple pattern char
+                res = isMatch(s, p, sIndex+1, pIndex+1);
+            }
+
+            if (res) {
+                return true;
+            }
+            return false;
+        };
+
+
+        assert(isMatch('ax', 'ax'), true);
+        assert(isMatch('ax', 'axp'), false);
+        assert(isMatch('aq', 'ax'), false);
+        assert(isMatch('x', 'x'), true);
+        assert(isMatch('q', 'x'), false);
+
+        assert(isMatch('aa', 'a'), false);
+        assert(isMatch('af', 'a.'), true);
+        assert(isMatch('a', '.'), true);
+        assert(isMatch('abc', '...'), true);
+        assert(isMatch('abc', '....'), false);
+        assert(isMatch('abc', '....*'), true);
+        assert(isMatch('abc', '.b.'), true);
+        assert(isMatch('abc', '.b..'), false);
+
+        assert(isMatch('wb', 'wa*b'), true);
+        assert(isMatch('a', 'a*'), true);
+        assert(isMatch('aa', 'a*'), true);
+        assert(isMatch('ab', 'a*b'), true);
+        assert(isMatch('b', 'a*b'), true);
+        assert(isMatch('cb', 'a*b'), false);
+
+        assert(isMatch('cb', '.*b'), true);
+        assert(isMatch('wcb', '.*b'), true);
+
+        assert(isMatch('ab', '.*'), true);
+        assert(isMatch('aab', 'c*a*b'), true);
+        assert(isMatch('mississippi', 'mis*is*p*.'), false); // no third 'i' char in pattern
+
+        assert(isMatch('ab', '.*c'), false);
+
+
+        function assert(actual, expected, msg) {
+            msg = msg || 'error';
+            if (actual === expected) {
+
+            }
+            else {
+                console.error('Expected: \"' + expected + '\", but actual: \"' + actual + '\"')
+            }
+        }
+
+    </script>
+</body>
+</html>

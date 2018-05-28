@@ -11,18 +11,21 @@
 
             let maxLength = 0, i = 0, j = 0;
             let buffer = [];
+            let map = {};
 
             while (i < s.length && j < s.length) {
                 // try to extend the range [i, j]
-                if (buffer.indexOf(s[j]) < 0) {
+                if (map[s[j]] === undefined) {
                     // uniq char
                     buffer.push(s[j]);
+                    map[s[j]] = true;
                     j++;
                     maxLength = Math.max(j-i, maxLength);
                 }
                 else {
                     // remove char i from buffer
                     buffer.shift();
+                    map[s[i]] = undefined;
                     i++;
                 }
             }

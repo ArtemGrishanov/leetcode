@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>297. Serialize and Deserialize Binary Tree</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/" target="_blank">https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/</a>
+    <script>
+
+
+        /**
+         * Definition for a binary tree node.
+         *
+         */
+        function TreeNode(val) {
+            this.val = val;
+            this.left = this.right = null;
+        }
+
+        TreeNode.prototype.toString = function() {
+            return this.val + ((this.next) ? ('->'+this.next.toString()): '');
+        }
+
+        /**
+         * Encodes a tree to a single string.
+         *
+         * @param {TreeNode} root
+         * @return {string}
+         */
+        var serialize = function(root) {
+            let rootesQueue = [];
+
+            if (!root) {
+                return '';
+            }
+
+            var res = '';
+
+            rootesQueue.push(root);
+
+            while (rootesQueue.length > 0) {
+
+                var node = rootesQueue.shift();
+                res += (node) ? parseInt(node.val): 'null';
+                res += ',';
+
+                if (node)
+                    rootesQueue.push(node.left);
+                if (node)
+                    rootesQueue.push(node.right);
+
+            }
+
+            // trim nulls at the end
+            var resA = res.split(',');
+            var i = resA.length-1;
+            while (resA.length > 0 && (resA[resA.length-1] == 'null' || resA[resA.length-1] == '')) {
+                resA.pop();
+            }
+
+            return resA.join(',');
+
+//            var arr = [];
+//            for (var i = 0; i < resA.length; i++) {
+//                if (resA[i] !== 'null') {
+//                    arr[i] = parseInt(resA[i]);
+//                }
+//                else {
+//                    arr.push('null');
+//                }
+//            }
+//            return arr.join(',');
+        };
+
+        /**
+         * Decodes your encoded data to tree.
+         *
+         * @param {string} data
+         * @return {TreeNode}
+         */
+        var deserialize = function(data) {
+            let rootesQueue = [];
+
+            if (!data || data.length === 0) {
+                return null;
+            }
+
+            let dataArr = data.split(',');
+
+            let root = new TreeNode(parseInt(dataArr.shift()));
+            rootesQueue.push(root);
+
+            while (dataArr.length > 0) {
+                // get next root elem
+                let node = rootesQueue.shift();
+
+                let leftVal = dataArr.shift();
+                if (leftVal === 'null' || leftVal === undefined) {
+                    node.left = null;
+                }
+                else {
+                    let left = new TreeNode(parseInt(leftVal));
+                    node.left = left;
+                    rootesQueue.push(left);
+                }
+
+                let rightVal = dataArr.shift();
+                if (rightVal === 'null' || rightVal === undefined) {
+                    node.right = null;
+                }
+                else {
+                    let right = new TreeNode(parseInt(rightVal));
+                    node.right = right;
+                    rootesQueue.push(right);
+                }
+            }
+
+            return root;
+        };
+
+        var search = function(root, value) {
+
+        }
+
+        /**
+         *
+         * @param {string} str = "1->4->5"
+         */
+        function createTree(str) {
+            var arr = str.split('->');
+            var prevNode = null;
+            var result = null;
+            for (var i = 0; i < arr.length; i++) {
+                var node = new ListNode(parseInt(arr[i]));
+                if (result === null) {
+                    result = node;
+                }
+                if (prevNode) {
+                    prevNode.next = node;
+                }
+                prevNode = node;
+            }
+
+            return result;
+        }
+
+        function assert(actual, expected, msg) {
+            msg = msg || 'error';
+            if (actual === expected) {
+
+            }
+            else {
+                console.error('Expected: \"' + expected + '\", but actual: \"' + actual + '\"')
+            }
+        }
+
+        /**
+         * Your functions will be called as such:
+         * deserialize(serialize(root));
+         */
+        var str = '1,2,3,null,null,4,5';
+        var r = deserialize(str);
+        assert(serialize(r), str);
+        console.dir(serialize(r))
+
+        var str = '5,4,7,3,null,2,null,-1,null,9';
+        var r1 = deserialize(str);
+        assert(serialize(r1), str);
+        console.dir(serialize(r1))
+
+        var str = '1,2,3';
+        var r2 = deserialize(str);
+        assert(serialize(r2), str);
+        console.dir(serialize(r2))
+
+        var str = '';
+        var r3 = deserialize(str);
+        assert(serialize(r3), str);
+
+    </script>
+</body>
+</html>
