@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2306e5b-8d61-4371-9bda-76beb221faa1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/problems/permutation_in_string.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/problems/regular_expression_matching.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/problems/serialize_and_deserialize_binary_tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/leetcode.iml" afterPath="$PROJECT_DIR$/.idea/leetcode.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/problems/longest_substring_without_repeating_characters.html" afterPath="$PROJECT_DIR$/problems/longest_substring_without_repeating_characters.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/problems/integer_to_roman.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/problems/median_of_two_sorted_arrays.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/problems/roman_to_integer.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="leetcode.iws" />
@@ -30,11 +28,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="serialize_and_deserialize_binary_tree.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/problems/serialize_and_deserialize_binary_tree.html">
+      <file leaf-file-name="integer_to_roman.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/problems/integer_to_roman.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="22" selection-start="2768" selection-end="2768" vertical-scroll-proportion="0.52034885" vertical-offset="1142" max-vertical-offset="2805">
-              <folding />
+            <state line="80" column="21" selection-start="2113" selection-end="2113" vertical-scroll-proportion="0.45494187" vertical-offset="887" max-vertical-offset="1575">
+              <folding>
+                <marker date="1532688638000" expanded="true" signature="299:565" placeholder="{...}" />
+                <marker date="1532688638000" expanded="true" signature="339:393" placeholder="{...}" />
+                <marker date="1532688638000" expanded="true" signature="466:523" placeholder="{...}" />
+                <marker date="1532688638000" expanded="true" signature="531:557" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -63,6 +66,9 @@
         <option value="$PROJECT_DIR$/problems/permutation_in_string.html" />
         <option value="$PROJECT_DIR$/problems/regular_expression_matching.html" />
         <option value="$PROJECT_DIR$/problems/serialize_and_deserialize_binary_tree.html" />
+        <option value="$PROJECT_DIR$/problems/median_of_two_sorted_arrays.html" />
+        <option value="$PROJECT_DIR$/problems/roman_to_integer.html" />
+        <option value="$PROJECT_DIR$/problems/integer_to_roman.html" />
       </list>
     </option>
   </component>
@@ -142,6 +148,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="options.lastSelected" value="coverage" />
+    <property name="FullScreen" value="false" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
   </component>
@@ -207,7 +214,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="873" extended-state="7" />
+    <frame x="0" y="23" width="1440" height="873" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -215,7 +222,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21018651" sideWeight="0.6706507" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22238164" sideWeight="0.6706507" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -242,29 +249,9 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pub/merge_k_sorted_lists.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="9" selection-start="3100" selection-end="3686" vertical-scroll-proportion="2.5072675" vertical-offset="0" max-vertical-offset="1860" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/problems/skyline_problem.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="514" column="9" selection-start="17768" selection-end="18035" vertical-scroll-proportion="0.36773255" vertical-offset="7457" max-vertical-offset="8385" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/problems/two_sum.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="725" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/problems/remove_element.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="13" selection-start="585" selection-end="585" vertical-scroll-proportion="0.41424417" vertical-offset="0" max-vertical-offset="688" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/problems/min_stack.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="9" selection-start="3787" selection-end="4054" vertical-scroll-proportion="0.80377907" vertical-offset="1577" max-vertical-offset="2265" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/problems/longest_substring_without_repeating_characters.html">
@@ -292,15 +279,73 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.027104137" vertical-offset="19" max-vertical-offset="1170" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/problems/tic_tac_toe.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/problems/trapping_water.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/problems/min_stack.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="117" column="13" selection-start="3096" selection-end="3096" vertical-scroll-proportion="2.550872" vertical-offset="0" max-vertical-offset="2265" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/problems/island_perimeter.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.3299419" vertical-offset="915" max-vertical-offset="1605" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/problems/add_two_numbers.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="23" selection-start="985" selection-end="985" vertical-scroll-proportion="6.3333335" vertical-offset="662" max-vertical-offset="1935" />
+        <state line="34" column="23" selection-start="985" selection-end="985" vertical-scroll-proportion="-1.0712209" vertical-offset="1247" max-vertical-offset="1935" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/problems/remove_element.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="13" selection-start="585" selection-end="585" vertical-scroll-proportion="0.41424417" vertical-offset="0" max-vertical-offset="688" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/problems/serialize_and_deserialize_binary_tree.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="22" selection-start="2768" selection-end="2768" vertical-scroll-proportion="0.52034885" vertical-offset="1142" max-vertical-offset="2805">
+        <state line="100" column="22" selection-start="2768" selection-end="2768" vertical-scroll-proportion="-0.8968023" vertical-offset="2117" max-vertical-offset="2805" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/problems/median_of_two_sorted_arrays.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="16" selection-start="3387" selection-end="3387" vertical-scroll-proportion="0.34593022" vertical-offset="1277" max-vertical-offset="2400">
+          <folding>
+            <marker date="1532681892000" expanded="true" signature="-1:-1" placeholder="/** @param {number[]} nums1 ...*/" />
+            <marker date="1532681892000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1532681892000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1532681892000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1532681892000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1532681892000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1532681892000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1532681892000" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/problems/roman_to_integer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="0" selection-start="654" selection-end="861" vertical-scroll-proportion="0.12790698" vertical-offset="332" max-vertical-offset="1170">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/problems/integer_to_roman.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="21" selection-start="2113" selection-end="2113" vertical-scroll-proportion="0.45494187" vertical-offset="887" max-vertical-offset="1575">
+          <folding>
+            <marker date="1532688638000" expanded="true" signature="299:565" placeholder="{...}" />
+            <marker date="1532688638000" expanded="true" signature="339:393" placeholder="{...}" />
+            <marker date="1532688638000" expanded="true" signature="466:523" placeholder="{...}" />
+            <marker date="1532688638000" expanded="true" signature="531:557" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
