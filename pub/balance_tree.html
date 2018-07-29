@@ -4,6 +4,18 @@
     <title></title>
 </head>
 <body>
-
+    <script>
+        var numSetBits = function(A){
+            var result = 0
+            var shifted = A;
+            while (shifted > 0) {
+                if (shifted & 1 > 0) {
+                    result++;
+                }
+                shifted = shifted >> 1;
+            }
+            return result;
+        }
+    </script>
 </body>
 </html>
