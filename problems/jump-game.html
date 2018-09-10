@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>55. Jump Game</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/jump-game/description/" target="_blank">https://leetcode.com/problems/jump-game/description/</a>
+    <script>
+
+        /**
+         * @param {number[]} nums
+         * @return {boolean}
+         */
+        var canJump_1 = function(nums) {
+            if (nums.length <= 1) return true;
+
+            let buf = [];
+
+            for (var i = 0; i < nums.length-1; i++) {
+                if (nums[i] === 0) {
+                    if (hasPositiveElem(buf) === false) {
+                        // stuck at zero element
+                        return false;
+                    }
+                }
+                else {
+                    buf.push(nums[i]);
+                }
+                decAndDeleteZeros(buf);
+            }
+
+            function decAndDeleteZeros(buf) {
+                for (var i = 0; i < buf.length;) {
+                    if (buf[i] <= 0) {
+                        buf.splice(i, 1);
+                    }
+                    else {
+                        buf[i]--;
+                        i++;
+                    }
+                }
+            }
+
+            function hasPositiveElem(buf) {
+                for (var i = 0; i < buf.length; i++) {
+                    if (buf[i] > 0) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            return true;
+        };
+
+        /**
+         * @param {number[]} nums
+         * @return {boolean}
+         */
+        var canJump_2 = function(nums) {
+            if (nums.length <= 1) return true;
+
+            let buf = new Array(nums.length);
+            buf[0] = 0;
+            let len = 0; // actual length of buf
+
+            for (var i = 0; i < nums.length-1; i++) {
+
+                if (nums[i] === 0 && len <= i) {
+                    return false;
+                }
+                else {
+                    // fill future elements +1
+                    for (var j = i+1; j < (i+nums[i]) && j < buf.length; j++) {
+                        buf[j] = buf[j] || 0;
+                        buf[j]++;
+                    }
+                    if (j > len) {
+                        len = j;
+                    }
+                }
+            }
+
+            return true;
+        };
+
+        /**
+         * @param {number[]} nums
+         * @return {boolean}
+         */
+        var canJump = function(nums) {
+            if (nums.length <= 1) return true;
+
+            for (var i = 0; i < nums.length-1; i++) {
+
+                if (nums[i] === 0) {
+                    // reverse
+                    let found = false;
+                    for (var j = i; j >= 0; j--) {
+                        if (nums[j] > (i-j)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        return false;
+                    }
+                }
+
+            }
+
+            return true;
+        };
+
+//        public boolean canJump(int[] nums) {
+//            if (nums.length == 0)
+//                throw new IllegalArgumentException("nums can't be empty");
+//            int farthest = 0;
+//            for (int i = 0; i <= farthest && i < nums.length; ++i) {
+//                farthest = Math.max(farthest, i + nums[i]);
+//            }
+//            return farthest >= nums.length - 1;
+//        }
+
+        console.log(canJump([2,3,1,1,4])); // true
+
+        console.log(canJump([3,2,1,0,4])); // false
+
+        console.log(canJump([0])); // true
+
+        console.log(canJump([2,0,0])); // true
+
+        console.log(canJump([1,2,0,1])); // true
+
+        console.log(canJump([0, 1])); // false
+
+    </script>
+</body>
+</html>

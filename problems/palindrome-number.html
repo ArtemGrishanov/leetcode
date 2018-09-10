@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>9. Palindrome Number</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/palindrome-number/description/" target="_blank">https://leetcode.com/problems/palindrome-number/description/</a>
+    <script>
+
+        /**
+         * @param {number} x
+         * @return {boolean}
+         */
+        var isPalindrome = function(x) {
+            var str = (typeof x !== 'string') ? x.toString(): x;
+            if (str.length === 1 || str.length === 0) {
+                return true;
+            }
+            if (str[0] !== str[str.length-1]) {
+                return false;
+            }
+            return isPalindrome(str.substring(1, str.length-1));
+        };
+
+        // решение без строк постепенным делением на 10
+        // https://leetcode.com/problems/palindrome-number/solution/
+
+        console.log(isPalindrome(121)===true);
+        console.log(isPalindrome(-121)===false);
+        console.log(isPalindrome(10)===false);
+        console.log(isPalindrome(1)===true);
+        console.log(isPalindrome(11)===true);
+    </script>
+</body>
+</html>

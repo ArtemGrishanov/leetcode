@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>19. Remove Nth Node From End of List</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/" target="_blank">https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/</a>
+    <script>
+
+
+        function assert(actual, expected, msg) {
+            msg = msg || 'error';
+            if (actual === expected) {
+
+            }
+            else {
+                console.error('Expected: \"' + expected + '\", but actual: \"' + actual + '\"')
+            }
+        }
+
+        /**
+         *
+         * @param {string} str = "1->4->5"
+         */
+        function createList(str) {
+            var arr = str.split('->');
+            var prevNode = null;
+            var result = null;
+            for (var i = 0; i < arr.length; i++) {
+                var node = new ListNode(parseInt(arr[i]));
+                if (result === null) {
+                    result = node;
+                }
+                if (prevNode) {
+                    prevNode.next = node;
+                }
+                prevNode = node;
+            }
+
+            return result;
+        }
+
+        function printList(head) {
+            var res = '';
+            var node = head;
+            while (node != null) {
+                res += node.val + '->';
+                node = node.next;
+            }
+            console.log(res);
+        }
+
+        /**
+         * Definition for singly-linked list.
+         */
+         function ListNode(val) {
+              this.val = val;
+              this.next = null;
+         }
+
+        /**
+         * @param {ListNode} head
+         * @param {number} n
+         * @return {ListNode}
+         */
+        var removeNthFromEnd = function(head, n) {
+            //
+            var arr = [];
+            var node = head;
+            while (node != null) {
+                arr.push(node); // save index information
+                node = node.next;
+            }
+
+            var delElem = arr[arr.length-n];
+            var prevElem = (arr.length == n) ? null: arr[arr.length-n-1];
+
+            if (prevElem === null) {
+                head = delElem.next;
+            }
+            else {
+                prevElem.next = delElem.next;
+                delete delElem;
+            }
+
+            return head;
+        };
+
+        var l = createList('1->2->3->4->5');
+        var l2 = removeNthFromEnd(l, 5);
+        console.log(l2); // 1->2->3->5
+        printList(l2);
+
+    </script>
+</body>
+</html>

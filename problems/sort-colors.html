@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>75. Sort Colors</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/sort-colors/description/" target="_blank">https://leetcode.com/problems/sort-colors/description/</a>
+    <script>
+
+        /**
+         * @param {number[]} nums
+         * @return {void} Do not return anything, modify nums in-place instead.
+         */
+        var sortColors = function(nums) {
+            var zeroIndex = -1;
+            var twoIndex = nums.length;
+            var l = 0;
+            while (l <= twoIndex) {
+                if (nums[l] === 2 && l < twoIndex) {
+                    twoIndex--;
+                    swap(l, twoIndex);
+                }
+                else if (nums[l] === 0 && l > zeroIndex) {
+                    zeroIndex++;
+                    swap(l, zeroIndex);
+                }
+                else {
+                    l++;
+                }
+            }
+            function swap(i1, i2) {
+                var t = nums[i1];
+                nums[i1] = nums[i2];
+                nums[i2] = t;
+            }
+        };
+
+        var input;
+
+        input = [2,0,2,1,1,0];
+        sortColors(input)
+        console.log(input); // [0,0,1,1,2,2]
+//
+        input = [1,2,0,1,2,1];
+        sortColors(input)
+        console.log(input); //
+
+        input = [1,2,1,1,2,1];
+        sortColors(input)
+        console.log(input); //
+//
+        input = [2,2,0];
+        sortColors(input)
+        console.log(input); //
+//
+        input = [2,0];
+        sortColors(input)
+        console.log(input); //
+
+        input = [1,0];
+        sortColors(input)
+        console.log(input); //
+
+        input = [1];
+        sortColors(input)
+        console.log(input); //
+
+        input = [1,2,0];
+        sortColors(input)
+        console.log(input); //
+    </script>
+</body>
+</html>

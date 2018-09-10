@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>300. Longest Increasing Subsequence</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/longest-increasing-subsequence/description/" target="_blank">https://leetcode.com/problems/longest-increasing-subsequence/description/</a>
+    <script>
+
+        function assert(actual, expected, msg) {
+            msg = msg || 'error';
+            if (actual != expected) {
+                console.error('Expected: \"' + expected + '\", but actual: \"' + actual + '\"')
+            }
+        }
+
+        /**
+         * Given an unsorted array of integers, find the length of longest increasing subsequence.
+         *
+         *  Input: [10,9,2,5,3,7,101,18]
+            Output: 4
+            Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+
+         * @param actual
+         * @param expected
+         * @param msg
+         */
+
+        /**
+         * @param {number[]} nums
+         * @return {number}
+         */
+        var lengthOfLIS = function(nums) {
+
+            var buf = new Array(nums.length);
+            var len = 0; // real length of buf
+
+            for (var i = 0; i < nums.length; i++) {
+
+                var r = binarySearch(buf, nums[i], 0, len, foo);
+                if (r < 0) {
+                    r = -(r+1);
+                }
+                buf[r] = nums[i];
+                if (r == len) {
+                    len++;
+                }
+            }
+
+            return len;
+        };
+
+        assert(lengthOfLIS([10,9,2,5,3,7,101,18]), 4);
+        assert(lengthOfLIS([2,3,4]), 3);
+        assert(lengthOfLIS([2]), 1);
+        assert(lengthOfLIS([7,5,4]), 1);
+        assert(lengthOfLIS([]), 0);
+
+        /**
+         * Binaru search implemenmtation
+         *
+         * @param arr
+         * @param value
+         * @param from
+         * @param to
+         * @param functionCompare
+         */
+        function binarySearch(arr, value, from, to, functionCompare) {
+            var m = from;
+            var n = to;
+
+            while (m <= n) {
+                var k = (m+n) >> 1;
+                var r = functionCompare(arr[k], value);
+
+                if (r < 0) {
+                    // move right
+                    m = k + 1;
+                }
+                else if (r > 0) {
+                    // move left
+                    n = k - 1;
+                }
+                else {
+                    // success
+                    return k;
+                }
+            }
+
+            return -(m+1);
+        }
+
+        function foo(a, b) {
+            return a-b;
+        }
+
+    </script>
+</body>
+</html>

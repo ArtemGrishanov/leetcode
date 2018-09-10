@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>15. 3Sum</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/3sum/description/" target="_blank">https://leetcode.com/problems/3sum/description/</a>
+    <script>
+
+
+        function assert(actual, expected, msg) {
+            msg = msg || 'error';
+            if (actual === expected) {
+
+            }
+            else {
+                console.error('Expected: \"' + expected + '\", but actual: \"' + actual + '\"')
+            }
+        }
+
+
+        /**
+         * @param {number[]} nums
+         * @return {number[][]}
+         */
+        var threeSum__ = function(nums) {
+            var result = [];
+
+            // a+b+c = 0:
+            var negativeNums = [];
+            var positiveNums = [];
+            for (var j = 0; j < nums.length; j++) {
+                if (nums[j] < 0) {
+                    negativeNums.push(nums[j]);
+                }
+                else {
+                    positiveNums.push(nums[j]);
+                }
+            }
+            negativeNums.sort(function(a,b) {return a > b});
+            positiveNums.sort(function(a,b) {return a > b});
+            // var bitMask = {};
+
+            // problem: sum=0
+            // problem: unique combinations
+
+            // взять первое отриц число
+            var negIndex = (negativeNums.length > 0) ? 0: undefined;
+            var neg;
+
+            //...
+            while (negIndex !== undefined) {
+                neg = negativeNums[negIndex];
+                console.dir('Unique negative: ' + neg);
+                // do pairs
+                // ...
+                for (var posIndex = 0; posIndex < positiveNums.length; posIndex++) {
+                    var pos = positiveNums[posIndex];
+                    var thirdNumberWeNeed = -neg-pos;
+                    console.dir('... we need: '+thirdNumberWeNeed);
+
+                    if (nums.indexOf(thirdNumberWeNeed) >= 0) {
+                        // if we have thirdNumberWeNeed, this is our triplet
+                        result.push([neg, pos, thirdNumberWeNeed]);
+                    }
+                }
+                negIndex = pickUpNextUniqNum(negativeNums, negIndex);
+            }
+
+            return result;
+        };
+
+        function pickUpNextUniqNum(nums, startIndex) {
+            // взять след значение из отсортированного массива и такое чтобы не совпало с предыдущим prevNum
+            var i = startIndex;
+            var prevNum = nums[i];
+            while (i < nums.length && nums[i] == prevNum) {
+                i++;
+            }
+            if (i < nums.length) {
+                return i;
+            }
+            return undefined;
+        }
+
+        // pick one negative integer, work with him, then delete - you get all unique combs?
+        // negative + positive + something = 0
+        //
+
+        // -4 -1 -1 0 1 2
+
+        // -1 -1 -4  |  0 1 2
+//        assert(threeSum([-1, 0, 1, 2, -1, -4]), [
+//            [-1, 0, 1],
+//            [-1, -1, 2]
+//        ]);
+
+
+
+        var threeSum = function(num) {
+            num.sort(function(a,b) {return a > b});
+            var res = [];
+            for (var i = 0; i < num.length-2; i++) {
+                // берем очередной элемнт i
+                // избегаем дубликатов num[i] != num[i-1]
+                if (i == 0 || (i > 0 && num[i] != num[i-1])) {
+                    // для элемента i для триплета, нам надо собрать сумму sum из двух элементов
+                    var lo = i+1, hi = num.length-1, sum = 0 - num[i];
+                    // навстречу друг другу снизу и сверху двигаем индексы
+                    // берем от i+1 так как до i мы уже проверяли раньше
+                    while (lo < hi) {
+                        if (num[lo] + num[hi] == sum) {
+                            res.push([
+                                num[i],
+                                num[lo],
+                                num[hi]]
+                            );
+                            while (lo < hi && num[lo] == num[lo+1]) lo++;
+                            while (lo < hi && num[hi] == num[hi-1]) hi--;
+                            lo++; hi--;
+                        }
+                        else if (num[lo] + num[hi] < sum)
+                            // увеличиваем сумму двух оставшихся элементов за счет нижнего
+                            // верхний и так максимальный
+                            lo++;
+                        else
+                            hi--;
+                    }
+                }
+            }
+            return res;
+        }
+
+        //console.dir(threeSum([-1, 0, 1, 2, -1, -4]));
+        console.dir(threeSum([-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6]));
+
+    </script>
+</body>
+</html>

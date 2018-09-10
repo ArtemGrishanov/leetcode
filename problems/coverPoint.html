@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>interviewbit.com - CoverPoints</title>
+</head>
+<body>
+    <script>
+
+        // найти количество шагов корые надо сделать из одной точки в другую по двумерной сетке
+
+        //param A : array of integers
+        //param B : array of integers
+        //return an integer
+        function coverPoints(A, B) {
+            // но это не оптимальное решение, хотя работает
+            var count = 0;
+            var x = A[0], y = B[0];
+            for (var i = 1; i < A.length; i++) {
+                var nx = A[i];
+                var ny = B[i];
+
+                while (x != nx || y != ny) {
+                    if (x != nx)
+                        x += ((nx>x) ? 1: -1);
+                    if (y != ny)
+                        y += ((ny>y) ? 1: -1);
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        console.log(coverPoints([0,1,1], [0,1,2]) === 2);
+        console.log(coverPoints([0,0], [0,0]) === 0);
+        console.log(coverPoints([0,5], [0,5]) === 5);
+
+        function coverPoints_(A, B) {
+            // оптимальная идея такая:
+            for (var i = 1; i < A.length; i++) {
+                // result += Math.max( Math.abs(nx-x), Math.abs(ny-y) );
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -8,6 +8,8 @@
     <script>
 
         /**
+         * O(N*logN)
+         *
          * @param {number[][]} envelopes
          * @return {number}
          */
@@ -22,7 +24,7 @@
                     return a[0] - b[0];
             });
 
-            //console.dir(envelopes);
+            console.dir(envelopes);
 
             var dp = new Array(envelopes.length);
             var len = 0;
@@ -36,10 +38,10 @@
                     if (a==b) return 0;
                 });
 
-                if(index < 0)
+                if (index < 0)
                     index = -(index + 1);
                 dp[index] = envelope[1];
-                if(index == len)
+                if (index == len)
                     len++;
             }
             return len;

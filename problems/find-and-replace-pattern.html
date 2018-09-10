@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>890. Find and Replace Pattern</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/find-and-replace-pattern/description/" target="_blank">https://leetcode.com/problems/find-and-replace-pattern/description/</a>
+    <script>
+
+        /**
+         * @param {string[]} words
+         * @param {string} pattern
+         * @return {string[]}
+         */
+        var findAndReplacePattern = function(words, pattern) {
+            // Time: O(N*K)
+            // Space: O(N*K)
+
+            var hashmap = {};
+
+            for (var i = 0; i < words.length; i++) {
+                // convert string to generic pattern 'abac' | 'ereq' -> '#0#1#0#2'
+                // put keys-values in hashmap
+                var numhash = getNumPattern(words[i]);
+                hashmap[numhash] = hashmap[numhash] || [];
+                hashmap[numhash].push(words[i]);
+            }
+
+            var patternNumHash = getNumPattern(pattern);
+
+            return hashmap[patternNumHash] || [];
+        };
+
+        function getNumPattern(str) {
+            var hashmap = {};
+            var res = '';
+            var counter = 0;
+            for (var i = 0; i < str.length; i++) {
+                if (hashmap[str[i]] !== undefined) {
+                    res += '#' + hashmap[str[i]];
+                }
+                else {
+                    hashmap[str[i]] = counter;
+                    res += '#' + counter;
+                    counter++;
+                }
+            }
+            return res;
+        }
+
+        var result = findAndReplacePattern(["abc","deq","mee","aqq","dkd","ccc"], "abb");
+        console.dir(result);
+
+    </script>
+</body>
+</html>

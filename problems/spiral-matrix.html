@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>54. Spiral Matrix</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/spiral-matrix/description/" target="_blank">https://leetcode.com/problems/spiral-matrix/description/</a>
+    <script>
+
+        /**
+         * @param {number[][]} matrix
+         * @return {number[]}
+         */
+        var spiralOrder = function(matrix) {
+            if (matrix.length === 0) return [];
+
+            var result = new Array(matrix[0].length * matrix.length);
+            var len = 0;
+
+            var leftBorder = 0,
+                rightBorder = matrix[0].length - 1,
+                topBorder = 0,
+                bottomBorder = matrix.length - 1;
+
+            var r = topBorder, c = leftBorder;
+
+            while (len < result.length) {
+                // go left
+                for (c = leftBorder, r = topBorder; c <= rightBorder; c++) {
+                    result[len++] = matrix[r][c];
+                }
+                if (len==result.length) break;
+                ++topBorder;
+                // go down
+                for (r = topBorder, c = rightBorder; r <= bottomBorder; r++) {
+                    result[len++] = matrix[r][c];
+                }
+                if (len==result.length) break;
+                --rightBorder;
+                // go right
+                for (c = rightBorder, r = bottomBorder; c >= leftBorder; c--) {
+                    result[len++] = matrix[r][c];
+                }
+                if (len==result.length) break;
+                --bottomBorder;
+                // go up
+                for (r = bottomBorder, c = leftBorder; r >= topBorder; r--) {
+                    result[len++] = matrix[r][c];
+                }
+                if (len==result.length) break;
+                ++leftBorder;
+            }
+
+            return result;
+
+        };
+
+        console.log(spiralOrder(
+            [
+                [ 1, 2, 3 ],
+                [ 4, 5, 6 ],
+                [ 7, 8, 9 ]
+            ]
+        )); // [1,2,3,6,9,8,7,4,5]
+
+        console.log(spiralOrder(
+            [
+                [1, 2, 3, 4],
+                [5, 6, 7, 8],
+                [9,10,11,12]
+            ]
+        ));
+
+        console.log(spiralOrder(
+            [
+                [1, 2, 3, 4]
+            ]
+        ));
+
+        console.log(spiralOrder(
+            [
+                [1, 2],
+                [4, 5]
+            ]
+        ));
+
+        console.log(spiralOrder(
+            [
+                [100]
+            ]
+        ));
+
+    </script>
+</body>
+</html>

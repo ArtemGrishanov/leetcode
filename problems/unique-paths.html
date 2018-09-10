@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>62. Unique Paths</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/unique-paths/description/" target="_blank">https://leetcode.com/problems/unique-paths/description/</a>
+    <script>
+
+        /**
+         * @param {number} m
+         * @param {number} n
+         * @return {number}
+         */
+        var uniquePaths = function(m, n) {
+            let matrix = [];
+            for (var r = 0; r < m; r++) {
+                let row = new Array(n);
+                matrix.push(row);
+                for (var c = 0; c < n; c++) {
+                    if (c == 0 || r == 0) {
+                        row[c] = 1;
+                    }
+                    else {
+                        row[c] = matrix[r-1][c] + matrix[r][c-1];
+                    }
+                }
+            }
+            return matrix[m-1][n-1];
+        };
+
+        console.log(uniquePaths(3,2)); // 3
+        console.log(uniquePaths(7,3)); // 28
+
+    </script>
+</body>
+</html>

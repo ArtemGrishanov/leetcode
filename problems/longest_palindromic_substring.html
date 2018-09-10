@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>9. Palindrome Number</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/longest-palindromic-substring/description/" target="_blank">https://leetcode.com/problems/longest-palindromic-substring/description/</a>
+    <script>
+
+        /**
+         * @param {string} s
+         * @return {string}
+         */
+        var longestPalindrome_slow = function(s) {
+            // max length of s == 1000
+            // O(n2) time
+
+            var startIndex = 0, endIndex = s.length;
+            var palyndrom = '';
+            var maxPalyndromLength = -1;
+
+            for (var startIndex = 0; startIndex < s.length; startIndex++) {
+                // go throw all string
+                for (var endIndex = s.length-1; endIndex >= startIndex && (endIndex-startIndex) >= maxPalyndromLength; endIndex--) {
+                    if (s[startIndex] === s[endIndex]) {
+                        // edage symbols are equal, start check palyndrom
+                        // candidate length here is greater then answer we already have
+                        var res = isPalyndrome(s, startIndex, endIndex);
+                        if (res === true && (endIndex+1-startIndex) > maxPalyndromLength) {
+                            palyndrom = s.substring(startIndex, endIndex+1);
+                            maxPalyndromLength = palyndrom.length;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return palyndrom;
+        };
+
+        var longestPalindrome = function(s) {
+
+            var palyndrom = '';
+            var maxPalyndromLength = 0;
+
+            for (var i = 0; i < s.length && s.length-i > maxPalyndromLength;) {
+                var found = false;
+                var endIndex = undefined;
+                if (s[i] === s[i+maxPalyndromLength]) {
+                    endIndex = i+maxPalyndromLength;
+                    // this is candidate for sub palyndrome (including one-char case)
+                    // we check sub-palyndroms with length greater then we already have
+                    // when maxPalyndromLength == 0, the first one char is palyndrome
+                    if (isPalyndrome(s, i, endIndex)) {
+                        // then try to enlarge this sub-palyndrome
+                        var left = i, right = endIndex;
+                        while (left > 0 && right < s.length-1 && s[left-1] == s[right+1]) {
+                            left--;
+                            right++;
+                        }
+                        if (right+1-left > maxPalyndromLength) {
+                            palyndrom = s.substring(left, right+1);
+                            maxPalyndromLength = palyndrom.length;
+                            found = true;
+                        }
+                    }
+                }
+
+                if (found===false && s[i] === s[i+maxPalyndromLength+1]) {
+                    endIndex = i+maxPalyndromLength+1;
+                    // this is candidate for sub palyndrome (including one-char case)
+                    // we check sub-palyndroms with length greater then we already have
+                    // when maxPalyndromLength == 0, the first one char is palyndrome
+                    if (isPalyndrome(s, i, endIndex)) {
+                        // then try to enlarge this sub-palyndrome
+                        var left = i, right = endIndex;
+                        while (left > 0 && right < s.length-1 && s[left-1] == s[right+1]) {
+                            left--;
+                            right++;
+                        }
+                        if (right+1-left > maxPalyndromLength) {
+                            palyndrom = s.substring(left, right+1);
+                            maxPalyndromLength = palyndrom.length;
+                            found = true;
+                        }
+                    }
+                }
+
+                if (found === false) i++;
+//                if (endIndex !== undefined) {
+//                    // this is candidate for sub palyndrome (including one-char case)
+//                    // we check sub-palyndroms with length greater then we already have
+//                    // when maxPalyndromLength == 0, the first one char is palyndrome
+//                    if (isPalyndrome(s, i, endIndex)) {
+//                        // then try to enlarge this sub-palyndrome
+//                        var left = i, right = endIndex;
+//                        while (left > 0 && right < s.length-1 && s[left-1] == s[right+1]) {
+//                            left--;
+//                            right++;
+//                        }
+//                        if (right+1-left > maxPalyndromLength) {
+//                            palyndrom = s.substring(left, right+1);
+//                            maxPalyndromLength = palyndrom.length;
+//                        }
+//                    }
+//                    else {
+//                        i++;
+//                    }
+//
+//                }
+//                else {
+//                    i++;
+//                }
+            }
+
+
+            return palyndrom;
+        }
+
+        function isPalyndrome(s, startIndex, endIndex) {
+            if (s && s[startIndex] == s[endIndex]) {
+                if (endIndex-startIndex <= 1) {
+                    return true;
+                }
+                return isPalyndrome(s, startIndex+1, endIndex-1);
+            }
+            return false;
+        }
+
+//        console.log(isPalyndrome('a', 0, 0)==true);
+//        console.log(isPalyndrome('ab', 0, 1)==false);
+//        console.log(isPalyndrome('aba', 0, 2)==true);
+//        console.log(isPalyndrome('tt', 0, 1)==true);
+//        console.log(isPalyndrome('wazzzzaw', 0, 7)==true); // wazzzzaw
+//        console.log(isPalyndrome('babadwazzzzaw12', 5, 12)==true); // wazzzzaw
+
+        console.log(longestPalindrome('aaabaaaa')==='aaabaaa');
+        console.log(longestPalindrome('aaaabaaa')==='aaabaaa');
+        console.log(longestPalindrome('babad')==='bab');
+        console.log(longestPalindrome('baabad')==='baab');
+        console.log(longestPalindrome('wbabadabrt')==='badab');
+        console.log(longestPalindrome('aaa')==='aaa');
+        console.log(longestPalindrome('cbbd')==='bb');
+        console.log(longestPalindrome('abc')==='a');
+        console.log(longestPalindrome('babadwazzzzaw12')==='wazzzzaw');
+
+
+        // 123asddsa1234567
+        // 123qwq4567890
+        // baabde
+
+
+    </script>
+</body>
+</html>

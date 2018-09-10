@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Glider.ai - Cryptocurrency</title>
+</head>
+<body>
+    <script>
+
+        function cryptocurrency(prices) {
+            var result = -1;
+            // Write the code to solve the problem below
+
+            if (prices.length > 1) {
+                var buy = prices[0];
+                var sell = prices[1];
+                result = sell - buy;
+                var min = buy;
+
+                for (var i = 1, j = 2; i < prices.length; i++) {
+                    var p1 = prices[i];
+
+                    if (min > p1) {
+                        min = p1;
+                    }
+                    if (p1 - min > result) {
+                        result = p1 - min;
+                    }
+
+                }
+            }
+
+            return (result < 0) ? 0: result;
+        }
+
+        console.log(cryptocurrency([25, 30, 48, 15, 25, 45, 10, 25]) === 30);
+        console.log(cryptocurrency([10, 20, 30, 40, 50]) === 40);
+        console.log(cryptocurrency([23, 55, 67, 22, 40, 65, 44, 20]) === 44);
+
+    </script>
+</body>
+</html>

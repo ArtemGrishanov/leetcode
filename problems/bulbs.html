@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>interviewbit.com - Bulbs</title>
+</head>
+<body>
+    <script>
+
+        //param A : array of integers
+        //return an integer
+        function bulbs(A) {
+            var result = 0;
+            var on = 1;
+            for (var i = 0; i < A.length; i++) {
+                if (A[i] !== on) {
+                    result++
+                    on = (on === 1) ? 0: 1;
+                }
+            }
+            return result;
+        }
+
+        console.log(bulbs([0, 1, 0, 1]) === 4);
+        console.log(bulbs([0, 1, 1, 1]) === 2);
+        console.log(bulbs([1, 1, 1, 1]) === 0);
+        console.log(bulbs([1, 1, 1, 0]) === 1);
+        console.log(bulbs([1, 1, 0, 1]) === 2);
+        console.log(bulbs([1, 0, 1, 0]) === 3);
+        console.log(bulbs([1, 0, 0, 1]) === 2);
+        console.log(bulbs([]) === 0);
+
+    </script>
+</body>
+</html>

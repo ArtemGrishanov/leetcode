@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        var numSetBits = function(A){
+            var result = 0
+            var shifted = A;
+            while (shifted > 0) {
+                if (shifted & 1 > 0) {
+                    result++;
+                }
+                shifted = shifted >> 1;
+            }
+            return result;
+        }
+
+        function summation(a, b){
+            $result = -1;
+            // Write the code to solve the problem below
+            var aNum = parseInt(a);
+            var bNum = parseInt(b);
+            if (!Number.isNaN(aNum) && !Number.isNaN(aNum)) {
+                $result = aNum + bNum;
+            }
+            else {
+                $result = undefined;
+            }
+            // Return the sum of two numbers
+            return $result;
+        }
+
+
+        function gcd(m, n) {
+            // 9, 6 = 3
+            if (m == 0) return n;
+            if (n == 0) return m;
+
+            var min = Math.min(m, n);
+
+            var candidate = min;
+            var e = 1;
+
+            while ((!isDivider(m, candidate) || !isDivider(n, candidate)) && candidate > 1) {
+                var stop = false;
+                while (true) {
+                    e++;
+                    if (e > min/2) {
+                        stop = true;
+                        break;
+                    }
+                    if (isDivider(min, e)) {
+                        break;
+                    }
+                }
+                if (stop) {
+                    candidate = 1;
+                }
+                else {
+                    candidate = min/e;
+                }
+            }
+
+            function isDivider(num, cand) {
+                return Math.round(num/cand)*cand == num;
+            }
+
+
+            return candidate;
+        }
+
+
+        function gcd1(A, B) {
+            if (A == 0)
+                return B;
+            return gcd1(B % A, A);
+        }
+
+
+        // Definition for singly-linked list.
+        function Node(data){
+            this.data = data
+            this.next = null
+        }
+
+        // param A : head node of linked list
+        // return the head node in the linked list
+        function deleteDuplicates(A) {
+            var node = null;
+            var prevNode = null;
+            var newNode = A;
+
+            while (!node || node.next !== null) {
+                if (node && newNode && node.data == newNode.data) {
+                    // delete element
+                    if (prevNode) {
+                        // new connection
+                        prevNode.next = newNode;
+                        node = null;
+                    }
+                    else {
+                        // change first node
+                        A = newNode;
+                        node = null;
+                    }
+                    // fix position
+                    node = prevNode;
+                }
+                else {
+                    // simply go
+                    prevNode = node;
+                    node = newNode;
+                    newNode = newNode.next;
+                }
+            }
+
+            return A;
+        }
+
+        /**
+         *
+         * @param {string} str = "1->4->5"
+         */
+        function createList(str) {
+            var arr = str.split('->');
+            var prevNode = null;
+            var result = null;
+            for (var i = 0; i < arr.length; i++) {
+                var node = new Node(parseInt(arr[i]));
+                if (result === null) {
+                    result = node;
+                }
+                if (prevNode) {
+                    prevNode.next = node;
+                }
+                prevNode = node;
+            }
+
+            return result;
+        }
+
+        var list1 = createList('1->2->3')
+        var list2 = createList('1->1->2->3')
+        var list3 = createList('1->2->2->3->3')
+        var list4 = createList('1->1')
+
+
+        // [1, 2, 2] returns 2 > more then 3/2 times
+        function majorityElement(A) {
+            var t = Math.floor(A.length/2);
+            var map = {};
+
+            for (var i = 0; i < A.length; i++) {
+                var val = map[A[i]];
+                if (val === undefined) {
+                    map[A[i]] = 1;
+                }
+                else {
+                    map[A[i]]++;
+                }
+                if (map[A[i]] > t) {
+                    return A[i];
+                }
+            }
+
+            return undefined;
+
+        }
+
+
+    </script>
+</body>
+</html>

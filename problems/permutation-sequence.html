@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>60. Permutation Sequence</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/permutation-sequence/description/" target="_blank">https://leetcode.com/problems/permutation-sequence/description/</a>
+    <script>
+
+        /**
+         * Given n will be between 1 and 9 inclusive.
+         Given k will be between 1 and n! inclusive.
+
+
+         * @param {number} n
+         * @param {number} k
+         * @return {string}
+         */
+        var getPermutation = function(n, k) {
+            const FACTORIAL = [0, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800];
+            if (k > FACTORIAL[n]) {
+                return null;
+            }
+            var nset = []; // create set for calculation
+            for (var charIndex = 0; charIndex < n; charIndex++) {
+                nset.push(charIndex+1);
+            }
+            var result = '';
+            var kk = k; // -1 because k starts from 1, not 0 (k is not an index)
+            for (var charIndex = 0; charIndex < n; charIndex++) {
+                // Пример для n=3
+                // "123" "132" "213" "231" ... , repeat = 2
+                // repeat - это количество повторений единицы, двойки и так далее на первой позиции
+                var repeat = FACTORIAL[n-charIndex-1];
+                var setIndex = (repeat > 0) ? Math.ceil(kk/repeat)-1: 0; // calc next char index from set
+                var permChar = nset[setIndex];
+                nset.splice(setIndex, 1); // remove this char from set, i've just use in in permutation
+                //kk = kk % repeat + 1;
+                kk = kk - (setIndex*repeat); // next sub index calc
+                result += permChar;
+            }
+            return result;
+        };
+
+        console.log(getPermutation(3,1)); // "123"
+        console.log(getPermutation(3,2)); // "132"
+        console.log(getPermutation(3,3)); // "213"
+        console.log(getPermutation(3,6)); // "321"
+        console.log(getPermutation(3,7)); // null
+
+        console.log(getPermutation(4,9)); // "2314"
+
+    </script>
+</body>
+</html>

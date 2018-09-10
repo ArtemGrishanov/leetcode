@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>56. Merge Intervals</title>
+</head>
+<body>
+    <a href="https://leetcode.com/problems/merge-intervals/description/" target="_blank">https://leetcode.com/problems/merge-intervals/description/</a>
+    <script>
+
+//        function Interval(start, end) {
+//            this.start = start;
+//            this.end = end;
+//        }
+
+
+
+        /**
+         * @param {Interval[]} intervals
+         * @return {Interval[]}
+         */
+        var merge = function(intervals) {
+
+            function overlap(in1, in2) {
+                return Math.max(in1[0], in2[0]) <= Math.min(in1[1], in2[1]);
+            }
+
+            function mergeTwo(interval, otherInterval) {
+                return [
+                    Math.min(interval[0], otherInterval[0]),
+                    Math.max(interval[1], otherInterval[1])
+                ];
+            }
+
+            // sort intervals by first number
+            intervals.sort(function(a, b) { return a[0]- b[0]; });
+            var res = [
+                intervals[0]
+            ];
+            var len = 1;
+            for (var i = 1; i < intervals.length; i++) {
+                if (overlap(res[len-1], intervals[i]) === true) {
+                    res[len-1] = mergeTwo(res[len-1], intervals[i]);
+                }
+                else {
+                    res.push(intervals[i]);
+                    len++;
+                }
+            }
+
+            return res;
+        };
+
+        console.log(merge([[1,3],[2,6],[8,10],[15,18]])); // [[1,6],[8,10],[15,18]]
+
+        console.log(merge([[1,4],[4,5]])); // [[1,5]]
+
+        console.log(merge([[1,3],[2,5],[4,7],[10,12]])); // [[1,7],[10,12]]
+
+        console.log(merge([[1,3],[2,5],[4,7],[0,12]])); // [[0,12]]
+
+    </script>
+</body>
+</html>
